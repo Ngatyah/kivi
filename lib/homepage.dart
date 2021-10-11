@@ -12,7 +12,6 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  String _message = "";
   final telephony = Telephony.instance;
   List<SmsMessage> messages = <SmsMessage>[];
   List<SmsMessage> mpesaMessages = <SmsMessage>[];
@@ -25,17 +24,11 @@ class _HomepageState extends State<Homepage> {
   onMessage(SmsMessage message) async {
     debugPrint(message.body);
     setState(() {
-      _message = message.body ?? "Error reading message body.";
-      mpesaMessages.add(message);
       debugPrint(message.body);
     });
   }
 
-  onSendStatus(SendStatus status) {
-    setState(() {
-      _message = status == SendStatus.SENT ? "sent" : "delivered";
-    });
-  }
+ 
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
@@ -45,7 +38,6 @@ class _HomepageState extends State<Homepage> {
       telephony.listenIncomingSms(
           onNewMessage: onMessage,
           onBackgroundMessage: (widget.backgroundHandler) as dynamic);
-      _message = widget.backgroundHandler();
       setState(() {
         mpesaMessages.add(widget.backgroundHandler());
       });
