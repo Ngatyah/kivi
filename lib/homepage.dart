@@ -28,8 +28,6 @@ class _HomepageState extends State<Homepage> {
     });
   }
 
- 
-
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     final bool? result = await telephony.requestPhoneAndSmsPermissions;
@@ -95,7 +93,8 @@ class _HomepageState extends State<Homepage> {
                               maxLines: 2,
                               style: const TextStyle(),
                             ),
-                            Text(convertDate((mpesaMessages[index].date).toString())),
+                            Text(convertDate(
+                                (mpesaMessages[index].date).toString())),
                           ],
                         ),
                       ),
@@ -115,5 +114,6 @@ class _HomepageState extends State<Homepage> {
     for (var message in messages) {
       mpesaMessages.add(message);
     }
+    mpesaMessages;
   }
 }
