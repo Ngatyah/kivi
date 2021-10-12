@@ -62,7 +62,7 @@ class _HomepageState extends State<Homepage> {
         future: fetchSMS(),
         builder: (context, snapshot) {
           if (mpesaMessages.isEmpty) {
-            return const Center(child: Text('Loading....'));
+            return const Center(child: CircularProgressIndicator());
           } else {
             return ListView.separated(
                 separatorBuilder: (context, index) => const Divider(
