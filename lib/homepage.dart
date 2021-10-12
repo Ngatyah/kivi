@@ -22,10 +22,7 @@ class _HomepageState extends State<Homepage> {
   }
 
   onMessage(SmsMessage message) async {
-    debugPrint(message.body);
-    setState(() {
-      debugPrint(message.body);
-    });
+    mpesaMessages.add(message);
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -36,7 +33,6 @@ class _HomepageState extends State<Homepage> {
       telephony.listenIncomingSms(
           onNewMessage: onMessage,
           onBackgroundMessage: (widget.backgroundHandler) as dynamic);
-     
     }
 
     if (!mounted) return;
