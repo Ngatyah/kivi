@@ -36,9 +36,7 @@ class _HomepageState extends State<Homepage> {
       telephony.listenIncomingSms(
           onNewMessage: onMessage,
           onBackgroundMessage: (widget.backgroundHandler) as dynamic);
-      setState(() {
-        mpesaMessages.add(widget.backgroundHandler());
-      });
+     
     }
 
     if (!mounted) return;
