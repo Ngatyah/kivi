@@ -25,7 +25,6 @@ class _HomepageState extends State<Homepage> {
     mpesaMessages.add(message);
     debugPrint(mpesaMessages.first.body);
   }
-  
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
@@ -57,15 +56,12 @@ class _HomepageState extends State<Homepage> {
       body: FutureBuilder(
         future: fetchSMS(),
         builder: (context, snapshot) {
-          if (mpesaMessages.isEmpty) {
+          if (snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           } else {
-            return ListView.separated(
-                separatorBuilder: (context, index) => const Divider(
-                      color: Colors.black,
-                    ),
+            return ListView.builder(
                 itemCount: mpesaMessages.length,
-                itemBuilder: (context, index) {
+                itemBuilder: (context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
@@ -107,9 +103,14 @@ class _HomepageState extends State<Homepage> {
     messages = await Telephony.instance.getInboxSms(
       columns: [SmsColumn.ADDRESS, SmsColumn.BODY, SmsColumn.DATE],
     );
+    // RegExp exp = RegExp(r"^[A-Z]{2}[\dA-Z]{8}\sConfirmed", multiLine: true);
+    //
     for (var message in messages) {
+      // bool matches = exp.hasMatch((message.body).toString());
       mpesaMessages.add(message);
+      // if (matches) {
+      //   mpesaMessages.add(message);
+      // }
     }
-    mpesaMessages;
   }
 }
