@@ -23,7 +23,9 @@ class _HomepageState extends State<Homepage> {
 
   onMessage(SmsMessage message) async {
     mpesaMessages.add(message);
+    debugPrint(mpesaMessages.first.body);
   }
+  
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
